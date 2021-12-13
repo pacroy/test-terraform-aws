@@ -54,3 +54,5 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_NATURAL_LANGUAGE: false
+          VALIDATE_TERRAFORM_TERRASCAN: false
+          
