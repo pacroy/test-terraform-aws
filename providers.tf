@@ -5,10 +5,7 @@ terraform {
       version = "~> 3.0"
     }
   }
-  backend "s3" {
-    bucket = "partfbackend"
-    key    = "test-terraform-aws/terraform.tfstate"
-  }
+  backend "s3" {}
 }
 
 provider "aws" {}
