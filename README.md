@@ -5,7 +5,7 @@ Test Terraform for AWS
 ## Prerequisites
 
 - [Create an access key pair](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-creds-create), if you haven't done so.
-- An S3 bucket for storing Terraform backend state files. You may create with this AWS CLI command:
+- An S3 bucket for storing Terraform backend state files. You may create with these AWS CLI commands:
 
     ```sh
     aws s3 mb s3://yours3bucket
@@ -24,6 +24,17 @@ Test Terraform for AWS
     ```sh
     aws s3api put-bucket-versioning --bucket yours3bucket \
         --versioning-configuration MFADelete=Disabled,Status=Enabled
+    ```
+
+- A DynamoDB table for Terraform to support state locking. You may create with these AWS CLI commands:
+
+    ```sh
+    aws dynamodb create-table \
+        --attribute-definitions AttributeName=LockID,AttributeType=S \
+        --table-name yourtablename \
+        --key-schema AttributeName=LockID,KeyType=HASH \
+        --billing-mode PROVISIONED \
+        --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
     ```
 
 ## Usage
