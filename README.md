@@ -39,3 +39,10 @@ aws ec2 describe-vpcs --filter Name=vpc-id,Values=$(tf output -json vpc | jq -r 
 ```sh
 terraform destroy -auto-approve
 ```
+
+## Cleanup
+
+```sh
+aws s3 rm s3://yours3bucket --recursive
+aws s3 rb s3://yours3bucket
+```
