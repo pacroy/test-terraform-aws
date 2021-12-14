@@ -9,6 +9,8 @@ Test Terraform for AWS
 
     ```sh
     aws s3 mb s3://yours3bucket
+    aws s3api put-public-access-block --bucket yours3bucket \
+        --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
     ```
 
 ## Usage
