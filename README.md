@@ -5,7 +5,7 @@ Test Terraform for AWS
 ## Prerequisites
 
 - [Create an access key pair](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-creds-create), if you haven't done so.
-- An S3 bucket for storing Terraform backend state files. You may create with this AWS CLI command:
+- An S3 bucket for storing Terraform backend state files. You may create with these AWS CLI commands:
 
     ```sh
     aws s3 mb s3://yours3bucket
@@ -26,6 +26,17 @@ Test Terraform for AWS
         --versioning-configuration MFADelete=Disabled,Status=Enabled
     ```
 
+- A DynamoDB table for Terraform to support state locking. You may create with these AWS CLI commands:
+
+    ```sh
+    aws dynamodb create-table \
+        --attribute-definitions AttributeName=LockID,AttributeType=S \
+        --table-name yourtablename \
+        --key-schema AttributeName=LockID,KeyType=HASH \
+        --billing-mode PROVISIONED \
+        --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
+    ```
+
 ## Usage
 
 ### Setup Credential
@@ -43,7 +54,8 @@ export AWS_SECRET_ACCESS_KEY="asecretkey"
 export AWS_DEFAULT_REGION="ap-southeast-1"
 terraform init \
     -backend-config="bucket=yours3bucket" \
-    -backend-config="key=test-terraform-aws/terraform.tfstate"
+    -backend-config="key=test-terraform-aws/terraform.tfstate" \
+    -backend-config="dynamodb_table=partfbackend"
 ```
 
 ### Apply
@@ -66,6 +78,8 @@ terraform destroy -auto-approve
 
 ## Cleanup
 
+### S3 Bucket
+
 If you enable bucket versioning, use [Empty Bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/empty-bucket.html) on the S3 console. Otherwise, you can use this command:
 
 ```sh
@@ -76,4 +90,10 @@ Now, delete the S3 bucket:
 
 ```sh
 aws s3 rb s3://yours3bucket
+```
+
+### DynamoDB Table
+
+```sh
+aws dynamodb delete-table --table-name partestbackend
 ```
