@@ -40,7 +40,7 @@ terraform init \
     -backend-config="key=test-terraform-aws/terraform.tfstate"
 ```
 
-## Apply
+### Apply
 
 ```sh
 terraform apply
