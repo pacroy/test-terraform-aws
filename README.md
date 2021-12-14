@@ -95,5 +95,5 @@ aws s3 rb s3://yours3bucket
 ### DynamoDB Table
 
 ```sh
-aws dynamodb delete-table --table-name partestbackend
+aws dynamodb delete-table --table-name yourtablename
 ```
