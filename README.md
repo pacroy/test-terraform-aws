@@ -77,6 +77,8 @@ terraform destroy -auto-approve
 
 ## Cleanup
 
+### S3 Bucket
+
 If you enable bucket versioning, use [Empty Bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/empty-bucket.html) on the S3 console. Otherwise, you can use this command:
 
 ```sh
@@ -87,4 +89,10 @@ Now, delete the S3 bucket:
 
 ```sh
 aws s3 rb s3://yours3bucket
+```
+
+### DynamoDB Table
+
+```sh
+aws dynamodb delete-table --table-name partestbackend
 ```
