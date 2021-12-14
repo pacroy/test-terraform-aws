@@ -68,6 +68,6 @@ aws s3 rm s3://yours3bucket --recursive
 
 Now, delete the S3 bucket:
 
-```
+```sh
 aws s3 rb s3://yours3bucket
 ```
