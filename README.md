@@ -2,11 +2,20 @@
 
 Test Terraform for AWS
 
+## Prerequisites
+
+- [Create an access key pair](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-creds-create), if you haven't done so.
+- An S3 bucket for storing Terraform backend state files. You may create with this AWS CLI command:
+
+    ```sh
+    aws s3 mb s3://yours3bucket
+    ```
+
 ## Usage
 
 ### Setup Credential
 
-If you haven't [configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html), setup Access Key pair using environment variables.
+If you haven't [configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html), setup an access key pair using environment variables.
 
 ```sh
 export AWS_ACCESS_KEY_ID="anaccesskey"
