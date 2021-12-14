@@ -13,6 +13,13 @@ Test Terraform for AWS
         --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
     ```
 
+    If you want enable bucket versioning:
+
+    ```sh
+    aws s3api put-bucket-versioning --bucket yours3bucket \
+        --versioning-configuration MFADelete=Disabled,Status=Enabled
+    ```
+
 ## Usage
 
 ### Setup Credential
@@ -53,7 +60,14 @@ terraform destroy -auto-approve
 
 ## Cleanup
 
+If you enable bucket versioning, use [Empty Bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/empty-bucket.html) on the S3 console. Otherwise, you can use this command:
+
 ```sh
 aws s3 rm s3://yours3bucket --recursive
+```
+
+Now, delete the S3 bucket:
+
+```
 aws s3 rb s3://yours3bucket
 ```
