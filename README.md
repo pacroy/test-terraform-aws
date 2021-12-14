@@ -9,8 +9,14 @@ Test Terraform for AWS
 
     ```sh
     aws s3 mb s3://yours3bucket
+
+    # This disable public access
     aws s3api put-public-access-block --bucket yours3bucket \
         --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
+
+    # This enable server-side encryption
+    aws s3api put-bucket-encryption --bucket yours3bucket \
+        --server-side-encryption-configuration '{"Rules":[{"ApplyServerSideEncryptionByDefault":{"SSEAlgorithm":"AES256"},"BucketKeyEnabled":true}]}'
     ```
 
     If you want enable bucket versioning:
