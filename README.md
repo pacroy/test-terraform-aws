@@ -9,8 +9,8 @@ Test Terraform for AWS
 Create a new user and an access key pair using these AWS CLI commands:
 
 ```sh
-aws iam create-user --user-name new-user-name
-aws iam create-access-key --user-name new-user-name
+aws iam create-user --user-name a-user-name
+aws iam create-access-key --user-name a-user-name
 ```
 
 ### Create a S3 Bucket
