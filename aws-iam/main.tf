@@ -29,9 +29,14 @@ resource "aws_iam_group_policy_attachment" "terraform_partfbackend" {
   policy_arn = aws_iam_policy.terraform_partfbackend.arn
 }
 
-resource "aws_iam_group_policy_attachment" "vpc_contributor" {
+resource "aws_iam_group_policy_attachment" "vpc_contributor_deny_ec2_permissions" {
   group      = aws_iam_group.vpc_contributor.name
   policy_arn = aws_iam_policy.deny_ec2_permissions.arn
+}
+
+resource "aws_iam_group_policy_attachment" "vpc_contributor_vpc_fullaccess" {
+  group      = aws_iam_group.vpc_contributor.name
+  policy_arn = "aarn:aws:iam::aws:policy/AmazonVPCFullAccess"
 }
 
 resource "aws_iam_user" "test_terraform_aws" {
