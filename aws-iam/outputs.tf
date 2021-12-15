@@ -22,3 +22,9 @@ output "user_test_terraform_aws" {
   description = "AWS IAM User test_terraform_aws"
   value       = aws_iam_user.test_terraform_aws
 }
+
+output "access_key_test_terraform_aws" {
+  description = "Access Key of user test_terraform_aws"
+  value       = aws_iam_access_key.test_terraform_aws
+  sensitive   = true
+}
