@@ -136,3 +136,9 @@ aws s3 rb s3://partfbackend
 ```sh
 aws dynamodb delete-table --table-name partfbackend
 ```
+
+### Create IAM User, Group, and Policies
+
+```sh
+(cd aws-iam && tf destroy --auto-approve)
+```
