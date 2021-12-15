@@ -4,16 +4,33 @@ Test Terraform for AWS
 
 ## Prerequisites
 
-### Create a New User and Access Key
+### Create IAM User, Group, and Policies
 
-Create a new user and an access key pair using these AWS CLI commands:
+This will create the following AWS IAM resources:
+
+- User `test_terraform_aws` and add to group `terraform_partfbackend` and `vpc_contributor`
+- Group `terraform_partfbackend` and attach the policy `terraform_partfbackend`
+- Group `vpc_contributor` and attach the policy `deny_ec2_permissions` and `AmazonVPCFullAccess`
+- Policy `terraform_partfbackend`: this allows sufficient access to S3 and DynomoDB table for Terraform backend state handling
+- Policy `deny_ec2_permissions`: This denies all EC2 permissions management actions
+
+Before execute the command below, you need to [configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config) with an access key of AWS user with permissions to create IAM resources.
 
 ```sh
-aws iam create-user --user-name test-terraform-aws
-aws iam create-access-key --user-name test-terraform-aws
+(cd aws-iam && terrafrom init && terraform apply)   # Enter `yes` to confirm
 ```
 
-Make sure you make note of AccessKeyId and SecretAccessKey as it appears only once.
+Display the access key id and secret key of the newly-created user:
+
+```sh
+(cd aws-iam && tf output -json access_key_test_terraform_aws | jq)
+```
+
+You may configure a separated profile for the new user:
+
+```sh
+aws configure --profile test_terraform_aws
+```
 
 ### Create a S3 Bucket
 
@@ -67,7 +84,7 @@ export AWS_SECRET_ACCESS_KEY="<secret_key>"
 If you want to use specific AWS CLI configuration profile, set `AWS_PROFILE` environment variable:
 
 ```sh
-export AWS_PROFILE="test-terraform-aws"
+export AWS_PROFILE="test_terraform_aws"
 ```
 
 Set the region and run Terraform Init.
