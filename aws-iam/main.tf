@@ -36,7 +36,7 @@ resource "aws_iam_group_policy_attachment" "vpc_contributor_deny_ec2_permissions
 
 resource "aws_iam_group_policy_attachment" "vpc_contributor_vpc_fullaccess" {
   group      = aws_iam_group.vpc_contributor.name
-  policy_arn = "aarn:aws:iam::aws:policy/AmazonVPCFullAccess"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonVPCFullAccess"
 }
 
 resource "aws_iam_user" "test_terraform_aws" {
