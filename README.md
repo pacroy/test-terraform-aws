@@ -137,7 +137,7 @@ aws s3 rb s3://partfbackend
 aws dynamodb delete-table --table-name partfbackend
 ```
 
-### Create IAM User, Group, and Policies
+### Delete IAM User, Group, and Policies
 
 ```sh
 (cd aws-iam && tf destroy --auto-approve)
