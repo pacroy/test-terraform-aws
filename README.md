@@ -76,7 +76,7 @@ Set the region and run Terraform Init.
 export AWS_DEFAULT_REGION="ap-southeast-1"
 terraform init \
     -backend-config="bucket=yours3bucket" \
-    -backend-config="key=test-terraform-aws/terraform.tfstate" \
+    -backend-config="key=path/to/terraform.tfstate" \
     -backend-config="dynamodb_table=yourtablename"
 ```
 
