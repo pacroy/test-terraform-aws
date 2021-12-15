@@ -64,12 +64,20 @@ export AWS_SECRET_ACCESS_KEY="asecretkey"
 
 ### Init
 
+If you want to use specific AWS CLI configuration profile, set `AWS_PROFILE` environment variable:
+
+```sh
+export AWS_PROFILE="anawsprofile"
+```
+
+Set the region and run Terraform Init.
+
 ```sh
 export AWS_DEFAULT_REGION="ap-southeast-1"
 terraform init \
     -backend-config="bucket=yours3bucket" \
     -backend-config="key=test-terraform-aws/terraform.tfstate" \
-    -backend-config="dynamodb_table=yourtablename"
+    -backend-config="dynamodb_table=yourtablename" \
 ```
 
 ### Apply
