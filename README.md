@@ -17,7 +17,7 @@ This will create the following AWS IAM resources:
 Before execute the command below, you need to [configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config) with an access key of AWS user with permissions to create IAM resources.
 
 ```sh
-(cd aws-iam && terrafrom init && terraform apply)   # Enter `yes` to confirm
+(cd aws-iam && terraform init && terraform apply)   # Enter `yes` to confirm
 ```
 
 Display the access key id and secret key of the newly-created user:
