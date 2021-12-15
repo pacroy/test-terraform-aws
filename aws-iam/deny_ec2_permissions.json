@@ -1,0 +1,16 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Deny",
+            "Action": [
+                "ec2:ModifyVpcEndpointServicePermissions",
+                "ec2:DeleteNetworkInterfacePermission",
+                "ec2:ModifySnapshotAttribute",
+                "ec2:CreateNetworkInterfacePermission",
+                "ec2:ResetSnapshotAttribute"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
