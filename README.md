@@ -13,6 +13,8 @@ aws iam create-user --user-name a-user-name
 aws iam create-access-key --user-name a-user-name
 ```
 
+Make sure you make note of AccessKeyId and SecretAccessKey as it appears only once.
+
 ### Create a S3 Bucket
 
 An S3 bucket for storing Terraform backend state files. You may create with these AWS CLI commands:
