@@ -97,7 +97,7 @@ resource "aws_iam_role_policy_attachment" "amazonec2fullaccess" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
 }
 
-resource "aws_iam_role_policy_attachment" "test-deny_ec2_permissions" {
+resource "aws_iam_role_policy_attachment" "deny_ec2_permissions" {
   role       = aws_iam_role.ec2_contributors.name
   policy_arn = aws_iam_policy.deny_ec2_permissions.arn
 }
@@ -108,7 +108,7 @@ resource "aws_iam_role" "s3_contributors" {
   assume_role_policy = data.aws_iam_policy_document.aws_account_778097775924.json
 }
 
-resource "aws_iam_role_policy_attachment" "amazonec2fullaccess" {
+resource "aws_iam_role_policy_attachment" "amazons3fullaccess" {
   role       = aws_iam_role.s3_contributors.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 }
