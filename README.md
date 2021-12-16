@@ -4,15 +4,21 @@ Test Terraform for AWS
 
 ## Prerequisites
 
-### Create IAM User, Group, and Policies
+### Create IAM User, Group, Policies, and Roles
 
 This will create the following AWS IAM resources:
 
-- User `test_terraform_aws` and add to group `terraform_partfbackend` and `vpc_contributor`
-- Group `terraform_partfbackend` and attach the policy `terraform_partfbackend`
-- Group `vpc_contributor` and attach the policy `deny_ec2_permissions` and `AmazonVPCFullAccess`
-- Policy `terraform_partfbackend`: this allows sufficient access to S3 and DynomoDB table for Terraform backend state handling
-- Policy `deny_ec2_permissions`: This denies all EC2 permissions management actions
+- User `test_terraform_aws` and add to group `terraform_users`
+- Group `terraform_users` and attach the the following policy:
+  - `allow_getuser_self`: this allows to get self user information
+  - `allow_assume_contributor_roles`: this allows to assume any contributors roles
+  - `terraform_partfbackend`: this allows sufficient access to S3 and DynomoDB table for Terraform backend state handling
+- Role `ec2_contributors` which can be assumed by account root and attach the the following policy:
+  - `AmazonEC2FullAccess`: Built-in role to provide full access to Amazon EC2
+  - `deny_ec2_permissions`: this denies all EC2 permision management actions
+- Role `s3_contributors` which can be assumed by account root and attach the the following policy:
+  - `AmazonS3FullAccess`: Built-in role to provide full access to all S3 buckets
+  - `deny_s3_permissions`: this denies all S3 permision management actions except `PutBucketPublicAccessBlock`
 
 Before execute the command below, you need to [configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config) with an access key of AWS user with permissions to create IAM resources.
 
@@ -137,7 +143,7 @@ aws s3 rb s3://partfbackend
 aws dynamodb delete-table --table-name partfbackend
 ```
 
-### Delete IAM User, Group, and Policies
+### Delete IAM User, Group, Policies, and Roles
 
 ```sh
 (cd aws-iam && tf destroy --auto-approve)
