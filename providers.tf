@@ -11,13 +11,13 @@ terraform {
 provider "aws" {
   alias = "ec2_contributors"
   assume_role {
-    role_arn     = "arn:aws:iam::778097775924:role/system/ec2_contributors"
+    role_arn = "arn:aws:iam::778097775924:role/system/ec2_contributors"
   }
 }
 
 provider "aws" {
   alias = "s3_contributors"
   assume_role {
-    role_arn     = "arn:aws:iam::778097775924:role/system/s3_contributors"
+    role_arn = "arn:aws:iam::778097775924:role/system/s3_contributors"
   }
 }
