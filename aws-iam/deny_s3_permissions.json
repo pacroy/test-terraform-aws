@@ -6,7 +6,6 @@
             "Action": [
                 "s3:PutAccessPointPolicyForObjectLambda",
                 "s3:PutAccountPublicAccessBlock",
-                "s3:PutBucketPublicAccessBlock",
                 "s3:PutMultiRegionAccessPointPolicy",
                 "s3:DeleteBucketPolicy",
                 "s3:BypassGovernanceRetention",
