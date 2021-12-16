@@ -1,3 +1,19 @@
+resource "aws_iam_policy" "allow_getuser_self" {
+  name        = "allow_getuser_self"
+  path        = "/"
+  description = "Allow to get self user information"
+
+  policy = file("${path.module}/allow_getuser_self.json")
+}
+
+resource "aws_iam_policy" "allow_assume_any_roles" {
+  name        = "allow_assume_any_roles"
+  path        = "/"
+  description = "Allow to assume any roles"
+
+  policy = file("${path.module}/allow_assume_any_roles.json")
+}
+
 resource "aws_iam_policy" "terraform_partfbackend" {
   name        = "terraform_partfbackend"
   path        = "/"
