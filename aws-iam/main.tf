@@ -35,11 +35,6 @@ resource "aws_iam_group" "terraform_users" {
   path = "/users/"
 }
 
-resource "aws_iam_group" "vpc_contributors" {
-  name = "vpc_contributors"
-  path = "/users/"
-}
-
 resource "aws_iam_group_policy_attachment" "allow_getuser_self" {
   group      = aws_iam_group.terraform_users.name
   policy_arn = aws_iam_policy.allow_getuser_self.arn
@@ -53,16 +48,6 @@ resource "aws_iam_group_policy_attachment" "allow_assume_any_roles" {
 resource "aws_iam_group_policy_attachment" "terraform_partfbackend" {
   group      = aws_iam_group.terraform_users.name
   policy_arn = aws_iam_policy.terraform_partfbackend.arn
-}
-
-resource "aws_iam_group_policy_attachment" "deny_ec2_permissions" {
-  group      = aws_iam_group.vpc_contributors.name
-  policy_arn = aws_iam_policy.deny_ec2_permissions.arn
-}
-
-resource "aws_iam_group_policy_attachment" "amazonvpcfullaccess" {
-  group      = aws_iam_group.vpc_contributors.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonVPCFullAccess"
 }
 
 resource "aws_iam_user" "test_terraform_aws" {
@@ -79,6 +64,5 @@ resource "aws_iam_user_group_membership" "test_terraform_aws" {
 
   groups = [
     aws_iam_group.terraform_users.name,
-    aws_iam_group.vpc_contributors.name,
   ]
 }
