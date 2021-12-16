@@ -23,7 +23,7 @@ Before execute the command below, you need to [configure AWS CLI](https://docs.a
 Display the access key id and secret key of the newly-created user:
 
 ```sh
-(cd aws-iam && tf output -json access_key_test_terraform_aws | jq)
+(cd aws-iam && tf output -json access_key | jq)
 ```
 
 You may configure a separated profile for the new user:
