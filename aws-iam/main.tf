@@ -11,7 +11,7 @@ resource "aws_iam_policy" "allow_assume_any_roles" {
   path        = "/"
   description = "Allow to assume any roles"
 
-  policy = file("${path.module}/allow_assume_any_roles.json")
+  policy = file("${path.module}/allow_assume_contributor_roles.json")
 }
 
 resource "aws_iam_policy" "terraform_partfbackend" {
