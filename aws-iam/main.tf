@@ -6,8 +6,8 @@ resource "aws_iam_policy" "allow_getuser_self" {
   policy = file("${path.module}/allow_getuser_self.json")
 }
 
-resource "aws_iam_policy" "allow_assume_any_roles" {
-  name        = "allow_assume_any_roles"
+resource "aws_iam_policy" "allow_assume_contributor_roles" {
+  name        = "allow_assume_contributor_roles"
   path        = "/"
   description = "Allow to assume any roles"
 
@@ -40,9 +40,9 @@ resource "aws_iam_group_policy_attachment" "allow_getuser_self" {
   policy_arn = aws_iam_policy.allow_getuser_self.arn
 }
 
-resource "aws_iam_group_policy_attachment" "allow_assume_any_roles" {
+resource "aws_iam_group_policy_attachment" "allow_assume_contributor_roles" {
   group      = aws_iam_group.terraform_users.name
-  policy_arn = aws_iam_policy.allow_assume_any_roles.arn
+  policy_arn = aws_iam_policy.allow_assume_contributor_roles.arn
 }
 
 resource "aws_iam_group_policy_attachment" "terraform_partfbackend" {
