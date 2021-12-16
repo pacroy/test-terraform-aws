@@ -66,3 +66,30 @@ resource "aws_iam_user_group_membership" "test_terraform_aws" {
     aws_iam_group.terraform_users.name,
   ]
 }
+
+data "aws_iam_policy_document" "aws_account_778097775924" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::778097775924:root"]
+    }
+  }
+}
+
+resource "aws_iam_role" "ec2_contributors" {
+  name               = "ec2_contributors"
+  path               = "/system/"
+  assume_role_policy = data.aws_iam_policy_document.aws_account_778097775924.json
+}
+
+resource "aws_iam_role_policy_attachment" "amazonec2fullaccess" {
+  role       = aws_iam_role.ec2_contributors.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "test-attach" {
+  role       = aws_iam_role.ec2_contributors.name
+  policy_arn = aws_iam_policy.deny_ec2_permissions.arn
+}
