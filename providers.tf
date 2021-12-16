@@ -8,4 +8,8 @@ terraform {
   backend "s3" {}
 }
 
-provider "aws" {}
+provider "aws" {
+  assume_role {
+    role_arn     = "arn:aws:iam::778097775924:role/system/ec2_contributors"
+  }
+}
