@@ -1,0 +1,25 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Deny",
+            "Action": [
+                "s3:PutAccessPointPolicyForObjectLambda",
+                "s3:PutAccountPublicAccessBlock",
+                "s3:PutBucketPublicAccessBlock",
+                "s3:PutMultiRegionAccessPointPolicy",
+                "s3:DeleteBucketPolicy",
+                "s3:BypassGovernanceRetention",
+                "s3:ObjectOwnerOverrideToBucketOwner",
+                "s3:DeleteAccessPointPolicyForObjectLambda",
+                "s3:PutObjectVersionAcl",
+                "s3:PutBucketAcl",
+                "s3:PutBucketPolicy",
+                "s3:DeleteAccessPointPolicy",
+                "s3:PutAccessPointPolicy",
+                "s3:PutObjectAcl"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

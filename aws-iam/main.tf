@@ -30,6 +30,14 @@ resource "aws_iam_policy" "deny_ec2_permissions" {
   policy = file("${path.module}/deny_ec2_permissions.json")
 }
 
+resource "aws_iam_policy" "deny_s3_permissions" {
+  name        = "deny_s3_permissions"
+  path        = "/"
+  description = "Deny all S3 permissions management actions"
+
+  policy = file("${path.module}/deny_s3_permissions.json")
+}
+
 resource "aws_iam_group" "terraform_users" {
   name = "terraform_users"
   path = "/users/"
@@ -89,7 +97,23 @@ resource "aws_iam_role_policy_attachment" "amazonec2fullaccess" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
 }
 
-resource "aws_iam_role_policy_attachment" "test-attach" {
+resource "aws_iam_role_policy_attachment" "test-deny_ec2_permissions" {
   role       = aws_iam_role.ec2_contributors.name
   policy_arn = aws_iam_policy.deny_ec2_permissions.arn
+}
+
+resource "aws_iam_role" "s3_contributors" {
+  name               = "s3_contributors"
+  path               = "/system/"
+  assume_role_policy = data.aws_iam_policy_document.aws_account_778097775924.json
+}
+
+resource "aws_iam_role_policy_attachment" "amazonec2fullaccess" {
+  role       = aws_iam_role.s3_contributors.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "deny_s3_permissions" {
+  role       = aws_iam_role.s3_contributors.name
+  policy_arn = aws_iam_policy.deny_s3_permissions.arn
 }
