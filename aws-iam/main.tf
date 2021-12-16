@@ -1,3 +1,4 @@
+# ===== Policies ==============================
 resource "aws_iam_policy" "allow_getuser_self" {
   name        = "allow_getuser_self"
   path        = "/"
@@ -38,6 +39,7 @@ resource "aws_iam_policy" "deny_s3_permissions" {
   policy = file("${path.module}/deny_s3_permissions.json")
 }
 
+# ===== Groups ==============================
 resource "aws_iam_group" "terraform_users" {
   name = "terraform_users"
   path = "/users/"
@@ -58,6 +60,7 @@ resource "aws_iam_group_policy_attachment" "terraform_partfbackend" {
   policy_arn = aws_iam_policy.terraform_partfbackend.arn
 }
 
+# ===== Users ==============================
 resource "aws_iam_user" "test_terraform_aws" {
   name = "test_terraform_aws"
   path = "/system/"
@@ -75,6 +78,7 @@ resource "aws_iam_user_group_membership" "test_terraform_aws" {
   ]
 }
 
+# ===== Roles ==============================
 data "aws_iam_policy_document" "aws_account_778097775924" {
   statement {
     actions = ["sts:AssumeRole"]
